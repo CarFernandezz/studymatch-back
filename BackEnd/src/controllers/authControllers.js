@@ -2,37 +2,33 @@ const user = require('../models/user');//importacion del modelo de datos para el
 const career = require('../models/careers');//importacion del modelo de datos para las carreras
 const bcrypt = require('bcryptjs'); //importacion de bcryptjs para hashear contraseñas
 const jwt = require('jsonwebtoken'); //importacion de jsonwebtoken para crear tokens
-const { validateRegister } = require('../utils/validators'); //importacion de validadores
 
 exports.register=async(req,res)=>{
     try {
-        const {email,password,nombre,carrera,anio,materias}=req.body;//obtencion de los datos del usuario desde el cuerpo de la solicitud
+        const {email,password,name,lastname}=req.body;
 
-        //Validar datos de entrada
-        const validation = validateRegister(req.body);
-        if (!validation.isValid) {
-            return res.status(400).json({ message: 'Datos inválidos', errors: validation.errors });
+        if(!email || !password || !name) {
+            return res.status(400).json({ message: 'Email, contraseña y nombre son requeridos' });
         }
 
-        const userExists=await user.findOne({email});//verificacion de si el usuario ya existe en la base de datos
+        const userExists=await user.findOne({email});
 
         if(userExists){
             return res.status(400).json({message:'El email ya está registrado'});
         }
 
-        //Hashear la contraseña antes de guardarla
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser=new user({
             email,
             password: hashedPassword,
-            nombre,
-            carrera,
-            anio,
-            materias
+            nombre: `${name} ${lastname || ''}`.trim(),
+            carrera: null,
+            anio: null,
+            materias: []
         });
 
-        await newUser.save();//guardado del usuario en la base de datos
+        await newUser.save();
 
         newUser.password=undefined;//eliminacion de la contraseña del usuario para no enviarla en la respuesta
 

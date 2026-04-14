@@ -21,12 +21,14 @@ const userSchema=new mongoose.Schema({ //creacion del esquema de datos para el u
     carrera:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Carrera',
-        required: true
+        required: false,
+        default: null
     },
 
     anio:{
         type:Number,
-        required:true
+        required: false,
+        default: null
     },
 
     materias: [String],

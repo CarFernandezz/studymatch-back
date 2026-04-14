@@ -1,4 +1,4 @@
-require('dotenv').config(); //Carga variables
+require('dotenv').config({ path: './src/.env' }); //Carga variables
 
 const express=require('express');
 const mongoose = require('mongoose');
@@ -17,7 +17,7 @@ app.use(express.json()); //permite el uso de json
 //rutas
 const userRoutes=require('./routes/authRoutes');//importa rutas de autenticacion
 app.use('/api/users',userRoutes); //ruta para usuarios
-app.use('/api/matches',require('./routes/matchRoutes')); //ruta para coincidencias
+// app.use('/api/matches',require('./routes/matchRoutes')); //ruta para coincidencias (archivo no existe)
 app.use('/api/careers',require('./routes/careersRoutes')); //ruta para carreras
 
 //inicializacion del servidor
