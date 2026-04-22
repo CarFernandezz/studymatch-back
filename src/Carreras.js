@@ -1,15 +1,15 @@
 require('dotenv').config();//Carga variables
 
-const mongoose=require('mongoose');
-const careers=require('./models/careers'); //importa el modelo de carreras
+const mongoose = require('mongoose');
+const careers = require('./models/careers'); //importa el modelo de carreras
 
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI,{
-    useNewParser:true,
-    useUnifiedTopology:true
+mongoose.connect(process.env.MONGO_URI, {
+  useNewParser: true,
+  useUnifiedTopology: true
 })
-.then(()=>console.log('Conectado a MongoDB')) //mensaje de conexion exitosa
-.catch((err)=>console.error('Error al conectar a MongoDB:',err)); //mensaje de error
+  .then(() => console.log('Conectado a MongoDB')) //mensaje de conexion exitosa
+  .catch((err) => console.error('Error al conectar a MongoDB:', err)); //mensaje de error
 
 
 await Careers.deleteMany(); // Elimina todas las carreras existentes
@@ -60,111 +60,110 @@ const careersData = [{
     }
   ]
 
-  
+
+},
+
+{
+  nombre: 'Ingenieria en Inteligencia Artificial',
+
+  anios: [
+    {
+      anio: 1,
+      materias: [
+        { nombre: "Matematica 1", codigo: "I101" },
+        { nombre: "Algebra Lineal", codigo: "I102" },
+        { nombre: "Estructura de datos y programación 1", codigo: "I103" },
+        { nombre: "Formación Humanística I-1", codigo: "I104" },
+        { nombre: "Matemática II", codigo: "I105" },
+        { nombre: "Fundamentos de Inteligencia Artificial", codigo: "I106" },
+        { nombre: "Física I", codigo: "I107" },
+        { nombre: "Formación Humanística I-2", codigo: "I108" },
+        { nombre: "Sistemas de Representación", codigo: "I109" },
+        { nombre: "Estructura de datos y programación 2", codigo: "I110" },
+        { nombre: "Taller I", codigo: "I111" }
+      ]
     },
 
     {
-        nombre:'Ingenieria en Inteligencia Artificial',
+      anio: 2,
+      materias: [
+        { nombre: "Matematica III", codigo: "I201" },
+        { nombre: "Física II", codigo: "I202" },
+        { nombre: "Sistemas Digitales", codigo: "I203" },
+        { nombre: "Formación Humanística II-1", codigo: "I204" },
+        { nombre: "Probabilidades y Estadística", codigo: "I205" },
+        { nombre: "Formación Humanística II-2", codigo: "I206" },
+        { nombre: "Química General", codigo: "I207" },
+        { nombre: "Taller II", codigo: "I208" },
+        { nombre: "Física III", codigo: "I209" },
+        { nombre: "Matemática IV", codigo: "I210" }
+      ]
+    },
 
-        anios: [
-       {
-          anio: 1,
-          materias: [
-            { nombre: "Matematica 1", codigo: "I101" },
-            { nombre: "Algebra Lineal", codigo: "I102" },
-            { nombre: "Estructura de datos y programación 1", codigo: "I103" },
-            { nombre: "Formación Humanística I-1", codigo: "I104" },
-            { nombre: "Matemática II", codigo: "I105" },
-            { nombre: "Fundamentos de Inteligencia Artificial", codigo: "I106" },
-            { nombre: "Física I", codigo: "I107" },
-            { nombre: "Formación Humanística I-2", codigo: "I108" },
-            { nombre: "Sistemas de Representación", codigo: "I109" },
-            { nombre: "Estructura de datos y programación 2", codigo: "I110" },
-            { nombre: "Taller I", codigo: "I111" }
-          ]
-        },
+    {
+      anio: 3,
+      materias: [
+        { nombre: "Arquitectura de computadores", codigo: "I301" },
+        { nombre: "Bases de datos", codigo: "I302" },
+        { nombre: "Métodos Numéricos", codigo: "I303" },
+        { nombre: "Formación Humanística III-1", codigo: "I304" },
+        { nombre: "Ingeniería de software 1", codigo: "I305" },
+        { nombre: "Fundamentos de Ciencia de Datos ( Data Science)", codigo: "I306" },
+        { nombre: "Gestión de grandes datos (Big Data)", codigo: "I307" },
+        { nombre: "Ingeniería de software 2", codigo: "I308" },
+        { nombre: "Formación Humanística III-2", codigo: "I309" },
+        { nombre: "Taller III", codigo: "I310" }
 
-        {
-          anio: 2,
-          materias: [
-            { nombre: "Matematica III", codigo: "I201" },
-            {nombre:"Física II", codigo: "I202"},
-            {nombre:"Sistemas Digitales", codigo: "I203"},
-            {nombre:"Formación Humanística II-1", codigo: "I204"},
-            {nombre:"Probabilidades y Estadística", codigo: "I205"},
-            {nombre:"Formación Humanística II-2", codigo: "I206"},
-            {nombre:"Química General", codigo: "I207"},
-            {nombre:"Taller II", codigo: "I208"},
-            {nombre:"Física III", codigo: "I209"},
-            {nombre:"Matemática IV", codigo: "I210"}
-          ]
-       },
+      ]
+    },
 
-       {
-        anio: 3,
-        materias: [
-          {nombre:"Arquitectura de computadores", codigo: "I301"},
-          {nombre:"Bases de datos", codigo: "I302"},
-          {nombre:"Métodos Numéricos", codigo: "I303"},
-          {nombre:"Formación Humanística III-1", codigo: "I304"},
-          {nombre:"Ingeniería de software 1", codigo: "I305"},
-          {nombre:"Fundamentos de Ciencia de Datos ( Data Science)", codigo: "I306"},
-          {nombre:"Gestión de grandes datos (Big Data)", codigo: "I307"},
-          {nombre:"Ingeniería de software 2", codigo: "I308"},
-          {nombre:"Formación Humanística III-2", codigo: "I309"},
-          {nombre:"Taller III", codigo: "I310"}
+    {
+      anio: 4,
+      materias: [
+        { nombre: "Visión computacional", codigo: "I401" },
+        { nombre: "Redes Neuronales", codigo: "I402" },
+        { nombre: "Procesamiento del lenguaje natural", codigo: "I403" },
+        { nombre: "Formación Humanística IV-1", codigo: "I404" },
+        { nombre: "Bioinformática 1", codigo: "I405" },
+        { nombre: "Aprendizaje de máquina (Machine learning)", codigo: "I406" },
+        { nombre: "Aprendizaje por refuerzo ", codigo: "I407" },
+        { nombre: "Ingeniería de características", codigo: "I408" },
+        { nombre: "Formación Humanística IV-2", codigo: "I409" },
+        { nombre: "Bioinformática 2", codigo: "I410" },
+        { nombre: "Taller IV", codigo: "I411" }
+      ]
+    },
 
-        ]
-       },
+    {
+      anio: 5,
+      materias: [
+        { nombre: "Fundamentos de economía y finanzas", codigo: "I501" },
+        { nombre: "Ciberseguridad", codigo: "I502" },
+        { nombre: "Seminario: Medioambiente, Higiene y Seguridad Laboral", codigo: "I503" },
+        { nombre: "Seminario Humanístico I", codigo: "I504" },
+        { nombre: "Seminario de Inteligencia Artificial I", codigo: "I505" },
+        { nombre: "Legislación", codigo: "I506" },
+        { nombre: "Organización empresarial", codigo: "I507" },
+        { nombre: "Seminario Humanístico II", codigo: "I508" },
+        { nombre: "Seminario de Inteligencia Artificial II", codigo: "I509" },
+        { nombre: "Proyecto Final Integrador", codigo: "I510" },
+        { nombre: "PPS (Práctica Profesional Supervisada)", codigo: "I511" },
 
-       {
-        anio: 4,
-        materias: [
-          {nombre:"Visión computacional", codigo: "I401"},
-          {nombre:"Redes Neuronales", codigo: "I402"},
-          {nombre:"Procesamiento del lenguaje natural", codigo: "I403"},
-          {nombre:"Formación Humanística IV-1", codigo: "I404"},
-          {nombre:"Bioinformática 1", codigo: "I405"},
-          {nombre:"Aprendizaje de máquina (Machine learning)", codigo: "I406"},
-          {nombre:"Aprendizaje por refuerzo ", codigo: "I407"},
-          {nombre:"Ingeniería de características", codigo: "I408"},
-          {nombre:"Formación Humanística IV-2", codigo: "I409"},
-          {nombre:"Bioinformática 2", codigo: "I410"},
-          {nombre:"Taller IV", codigo: "I411"}
-        ]
-       }, 
-
-       {
-        anio: 5,
-        materias: [
-          {nombre:"Fundamentos de economía y finanzas", codigo: "I501"},
-          {nombre:"Ciberseguridad", codigo: "I502"},
-          {nombre:"Seminario: Medioambiente, Higiene y Seguridad Laboral", codigo: "I503"},
-          {nombre:"Seminario Humanístico I", codigo: "I504"},
-          {nombre:"Seminario de Inteligencia Artificial I", codigo: "I505"},
-          {nombre:"Legislación", codigo: "I506"},
-          {nombre:"Organización empresarial", codigo: "I507"},
-          {nombre:"Seminario Humanístico II", codigo: "I508"},
-          {nombre:"Seminario de Inteligencia Artificial II", codigo: "I509"},
-          {nombre:"Proyecto Final Integrador", codigo: "I510"},
-          {nombre:"PPS (Práctica Profesional Supervisada)", codigo: "I511"},
-
-        ]
-       }
       ]
     }
+  ]
+}
 ];
 
 //insertar
-const resultado=await careers.insertMany(careersData);//inserta carreras
+const resultado = await careers.insertMany(careersData);//inserta carreras
 console.log(`✅ ${resultado.length} carreras insertadas`)//mensaje 
 
 //mostrar
 console.log('\n Carreras insertadas:');
 
-resultado.forEach((carrera,index)=>{
-  console.log(`${index+1}. ${carrera.nombre}`); //muestra las carreras insertadas
+resultado.forEach((carrera, index) => {
+  console.log(`${index + 1}. ${carrera.nombre}`); //muestra las carreras insertadas
 });
 
 process.exit(0);
- 

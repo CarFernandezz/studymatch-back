@@ -12,7 +12,7 @@ exports.verifyToken = (req, res, next) => {
 
         //Verificar y decodificar el token
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'tu_clave_secreta_super_segura_2024');
-        
+
         //Guardar la información del usuario en req para usar después
         req.userId = decoded.userId;
         req.userEmail = decoded.email;

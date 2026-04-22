@@ -1,18 +1,18 @@
-const mongoose=require('mongoose'); 
+const mongoose = require('mongoose');
 
 
-const careerSchema=new mongoose.Schema({
-    nombre:{
-        type:String,
-        required:true,
-        unique:true,
+const careerSchema = new mongoose.Schema({
+    nombre: {
+        type: String,
+        required: true,
+        unique: true,
     },
 
-    anios:[{
-        anio:Number,
-        materias:[{
-            nombre:String,
-            codigo:String
+    anios: [{
+        anio: Number,
+        materias: [{
+            nombre: String,
+            codigo: String
         }]
     }],
 
@@ -24,4 +24,4 @@ const careerSchema=new mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Carrera',careerSchema);
+module.exports = mongoose.model('Carrera', careerSchema);

@@ -11,7 +11,7 @@ exports.updateProfile = async (req, res) => { // Exporta la función updateProfi
             }); // Responde error 400 si no se envió nada
         }
 
-        if (anio && (typeof anio !== 'number' || anio < 1 || anio > 6)) { 
+        if (anio && (typeof anio !== 'number' || anio < 1 || anio > 6)) {
             // Si anio existe, valida que sea número entre 1 y 6
 
             return res.status(400).json({ message: 'Año inválido' }); // Devuelve error si el año no cumple la validación
@@ -36,7 +36,7 @@ exports.updateProfile = async (req, res) => { // Exporta la función updateProfi
         if (materias) { // Si se enviaron materias
             for (const materia of materias) { // Recorre cada materia del array
 
-                if (materia.estado && !estadosValidos.includes(materia.estado)) { 
+                if (materia.estado && !estadosValidos.includes(materia.estado)) {
                     // Si trae estado y no está en la lista válida
 
                     return res.status(400).json({
@@ -44,16 +44,17 @@ exports.updateProfile = async (req, res) => { // Exporta la función updateProfi
                     }); // Error por estado inválido
                 }
 
-                if(materia.esAyudante && materia.estado !== 'aprobada') {
-                    return res.status(400).json({ message: `Una materia solo puede ser marcada como ayudante si su estado es aprobada` 
+                if (materia.esAyudante && materia.estado !== 'aprobada') {
+                    return res.status(400).json({
+                        message: `Una materia solo puede ser marcada como ayudante si su estado es aprobada`
                     });// Error por estado no aprobado para ayudante
                 }
 
-                if(materia.esAyudante && !materia.nivel){
-                    return res.status(400).json({message: 'debes indicar tu nivel para ser ayudante'}); // Error por falta de nivel para ayudante
+                if (materia.esAyudante && !materia.nivel) {
+                    return res.status(400).json({ message: 'debes indicar tu nivel para ser ayudante' }); // Error por falta de nivel para ayudante
                 };
 
-                if (materia.nivel && !nivelesValidos.includes(materia.nivel)) { 
+                if (materia.nivel && !nivelesValidos.includes(materia.nivel)) {
                     // Si trae nivel y no está permitido
 
                     return res.status(400).json({
@@ -63,12 +64,12 @@ exports.updateProfile = async (req, res) => { // Exporta la función updateProfi
             }
         }
 
-        const updatedUser = await User.findByIdAndUpdate( req.userId, // ID del usuario autenticado
-         { carrera, anio, materias }, // Campos a actualizar
+        const updatedUser = await User.findByIdAndUpdate(req.userId, // ID del usuario autenticado
+            { carrera, anio, materias }, // Campos a actualizar
             { new: true } // Devuelve el documento actualizado
         )
-        .populate('carrera') // Reemplaza el id de carrera con el documento relacionado
-        .select('-password'); // Excluye la contraseña del resultado
+            .populate('carrera') // Reemplaza el id de carrera con el documento relacionado
+            .select('-password'); // Excluye la contraseña del resultado
 
         if (!updatedUser) { // Si no encontró usuario con ese ID
             return res.status(404).json({
@@ -85,12 +86,12 @@ exports.updateProfile = async (req, res) => { // Exporta la función updateProfi
         res.status(500).json({
             message: 'Error al actualizar el perfil',
             error
-        }); 
+        });
     }
 };
 
 exports.getProfile = async (req, res) => { // Exporta función para obtener perfil del usuario
-    try{
+    try {
         const user = await User.findById(req.userId)// Busca el usuario por ID obtenido del token
             .populate('carrera') // Reemplaza el id de carrera con el documento relacionado
             .select('-password'); // Excluye la contraseña del resultado
@@ -106,11 +107,11 @@ exports.getProfile = async (req, res) => { // Exporta función para obtener perf
             user
         }); // Respuesta exitosa con usuario
     }
-    catch(error){ // Captura errores inesperados
+    catch (error) { // Captura errores inesperados
         res.status(500).json({
             message: 'Error al obtener el perfil',
             error
-        }); 
+        });
     }
 
 }

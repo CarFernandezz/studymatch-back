@@ -1,16 +1,16 @@
 const mongoose = require('mongoose'); //importacion de mongoose para crear el modelo de datos
 
-const userSchema=new mongoose.Schema({ //creacion del esquema de datos para el usuario
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-        lowercase:true
+const userSchema = new mongoose.Schema({ //creacion del esquema de datos para el usuario
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
     },
 
-    password:{
-        type:String,
-        required:true
+    password: {
+        type: String,
+        required: true
     },
 
     nombre: {
@@ -18,32 +18,32 @@ const userSchema=new mongoose.Schema({ //creacion del esquema de datos para el u
         required: true
     },
 
-    carrera:{
+    carrera: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Carrera',
         required: true
     },
 
-    anio:{
-        type:Number,
-        required:true,
+    anio: {
+        type: Number,
+        required: true,
     },
 
     materias: [{
         nombre: String,
         estado: {
             type: String,
-            enum: ['aprobada', 'cursando', 'pendiente' ,'recursando', 'no cursada'],
+            enum: ['aprobada', 'cursando', 'pendiente', 'recursando', 'no cursada'],
         },
         esAyudante: {
-        type: Boolean,
-        default: false
+            type: Boolean,
+            default: false
         },
-        nivel:{
+        nivel: {
             type: String,
             enum: ["basico", "intermedio", "avanzado"]
         }
-            
+
     }],
     createdAt: {
         type: Date,
@@ -51,4 +51,4 @@ const userSchema=new mongoose.Schema({ //creacion del esquema de datos para el u
     }
 });
 
-module.exports=mongoose.model('User',userSchema); //exportacion del modelo de datos para el usuario
+module.exports = mongoose.model('User', userSchema); //exportacion del modelo de datos para el usuario
